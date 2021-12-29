@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexVCenter {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.flexHCenter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.alignCenter {
+  align-items: center;
+}
+.alignMiddle {
+  align-items: center;
+}
+.spaceBetween {
+  justify-content: space-between;
+}

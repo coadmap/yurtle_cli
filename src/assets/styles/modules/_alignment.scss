@@ -1,0 +1,73 @@
+.centerAlign {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textCenter {
+  text-align: center;
+
+  > * {
+    @extend .centerAlign;
+  }
+}
+
+.centerAlignContent {
+  align-content: center;
+  display: flex;
+}
+
+.relative {
+  position: relative;
+
+  .absolute {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+
+    &.topLeft {
+      left: 0;
+      top: 0;
+    }
+    &.topCenter {
+      top: 0;
+      // FIXME
+    }
+    &.topRight {
+      right: 0;
+      top: 0;
+    }
+    &.topFill {
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    &.middleLeft {
+      // TODO
+    }
+    &.middleCenter {
+      // TODO
+    }
+    &.middleRight {
+      // TODO
+    }
+    &.middleFill {
+      // TODO
+    }
+    &.bottomLeft {
+      bottom: 0;
+      left: 0;
+    }
+    &.bottomCenter {
+      // TODO
+    }
+    &.bottomRight {
+      bottom: 0;
+      right: 0;
+    }
+    &.bottomFill {
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}
