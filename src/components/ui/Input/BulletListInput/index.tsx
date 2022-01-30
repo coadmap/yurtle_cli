@@ -37,7 +37,7 @@ const BulletListInput: VFC<BulletListInputProps> = ({ value, defaultValue, onCha
       {items.map((item, idx) => (
         <input type="text" value={item.value} key={`${item.value}${idx}`} onKeyPress={async e => {
           e.preventDefault();
-          if (e.key === 'Enter') await onPut(item);
+          if (e.key === "Enter") await onPut(item);
         }} />
       ))}
     </div>

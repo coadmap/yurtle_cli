@@ -26,7 +26,7 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task }) => {
         <div>
           <input ref={inputRef} type="text" defaultValue={task.name} onKeyPress={async e => {
             e.preventDefault();
-            if (e.key === 'Enter') await onUpdate();
+            if (e.key === "Enter") await onUpdate();
           }} />
         </div>
       </LiquidRow>
