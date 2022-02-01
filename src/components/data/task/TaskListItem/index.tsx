@@ -1,3 +1,0 @@
-type TaskListItemProps = {
-    task: T
-}
