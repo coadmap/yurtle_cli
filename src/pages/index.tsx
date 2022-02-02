@@ -1,5 +1,5 @@
 import {VFC} from "react";
-import TaskListItem from "components/data/task/TaskListItem";
+import TaskListItem from "components/model/task/TaskListItem";
 
 const Home: VFC = () => {
   return (
