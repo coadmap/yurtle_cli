@@ -11,11 +11,10 @@ import LiquidRow from "components/ui/LiquidRow";
 
 type TaskListItemProps = {
   task?: Task | null;
-  onRemove?: () => void;
   className?: string;
 };
 
-const TaskListItem: VFC<TaskListItemProps> = ({ task, onRemove, className }) => {
+const TaskListItem: VFC<TaskListItemProps> = ({ task, onCompleteTask, onRemove, className }) => {
   const [isTaskNameEdit, setIsTaskNameEdit] = useState(!task);
   const [value, setValue] = useState(task?.name);
   const [deadline, setDeadline] = useState(task?.deadline);
@@ -25,10 +24,13 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task, onRemove, className }) => 
     console.log(value);
     setIsTaskNameEdit(false);
   }, [setIsTaskNameEdit]);
+  const onRemove = useCallback(() => {}, []);
   const onDone = useCallback(() => {
+    if (!task?.id) return;
+
     console.log("タスク完了");
-    onRemove?.();
-  }, [onRemove]);
+    onCompleteTask?.(task.id);
+  }, [onCompleteTask]);
 
   return (
     <div className={classNames(styles.item, className)}>
