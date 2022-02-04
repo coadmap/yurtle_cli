@@ -1,16 +1,29 @@
-import {VFC} from "react";
+import { VFC } from "react";
 import TaskListItem from "components/model/task/TaskListItem";
+import moment from "moment";
+import Layout from "components/ui/Layout";
+import Header from "components/ui/Layout/Header";
+import Section from "components/ui/Layout/Section";
+import PageContent from "components/ui/Layout/PageContent";
 
 const Home: VFC = () => {
   return (
-    <div>
-      タスク
-      <TaskListItem task={{
-        id: "fda",
-        name: "fsdfsa",
-      }} />
-    </div>
-  )
-}
+    <Layout>
+      <Header pageTitle="マイタスク" />
+
+      <PageContent>
+        <Section>
+          <TaskListItem
+            task={{
+              id: "fda",
+              name: "fsdfsa",
+              deadline: moment(),
+            }}
+          />
+        </Section>
+      </PageContent>
+    </Layout>
+  );
+};
 
 export default Home;

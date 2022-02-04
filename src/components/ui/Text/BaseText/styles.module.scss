@@ -1,0 +1,64 @@
+@import "src/assets/styles/modules";
+
+.base {
+  color: $black;
+  font-size: $f-size-md;
+
+  &[data-bold="true"] {
+    font-weight: bold;
+  }
+
+  &[data-block="true"] {
+    display: block;
+  }
+  &[data-inline="true"] {
+    display: inline;
+  }
+
+  &[data-color="black"] {
+    color: $black;
+  }
+
+  &[data-color="white"] {
+    color: $white;
+  }
+
+  &[data-color="mediumGray"] {
+    color: $medium-gray;
+  }
+
+  // blackとかwhiteじゃなくてこういう感じに使いたい
+  &[data-color="default"] {
+    color: $black;
+  }
+
+  &[data-color="primary"] {
+    color: $primary-color;
+  }
+
+  &[data-color="sub"] {
+    color: $medium-gray;
+  }
+
+  &[data-color="disable"] {
+    color: $disabled-color;
+  }
+
+  &[data-color="danger"] {
+    color: $danger-color;
+  }
+
+  &[data-color="gradation"] {
+    @include primary-gradient(-10deg);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.opposite {
+  color: $white;
+}

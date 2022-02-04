@@ -6,6 +6,7 @@
 @import "modules/shadow";
 @import "modules/flex";
 @import "modules/z-index";
+@import "modules/radius";
 
 .page {
   > section {
@@ -33,10 +34,6 @@
 
 .inline {
   display: inline;
-}
-
-.wide {
-  width: 100%;
 }
 
 .listable {

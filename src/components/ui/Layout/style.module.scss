@@ -1,0 +1,29 @@
+@import "src/assets/styles/modules";
+
+$header-height: 70px;
+
+.layout {
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  background-color: $white;
+  height: $header-height;
+  padding: $space-md $space-lg;
+}
+
+.pageContent {
+  background-color: $content-bg-color;
+  min-height: calc(100vh - #{$header-height});
+  width: 100%;
+
+  .section {
+    padding: 0 $space-lg;
+
+    .sectionInnerWrap {
+      margin: 0 auto;
+      max-width: 1000px;
+    }
+  }
+}

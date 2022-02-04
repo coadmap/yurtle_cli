@@ -1,2 +1,12 @@
 @import "src/assets/styles/modules";
 
+.item {
+  @include drop-shadow(sm);
+  @include border-radius(sm);
+  @extend .row;
+  @extend .vCenter;
+  @extend .mdHGutter;
+
+  background-color: $white;
+  padding: $space-xs $space-sm;
+}
