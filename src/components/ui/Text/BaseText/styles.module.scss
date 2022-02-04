@@ -48,6 +48,10 @@
     color: $danger-color;
   }
 
+  &[data-color="warning"] {
+    color: $warning-color;
+  }
+
   &[data-color="gradation"] {
     @include primary-gradient(-10deg);
     -webkit-background-clip: text;

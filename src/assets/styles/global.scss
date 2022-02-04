@@ -1,18 +1,5 @@
 @import "modules";
 
-@font-face {
-  font-family: "nsjpr";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../font/nsjpr.woff") format("woff");
-}
-
-@font-face {
-  font-family: "nsjpr";
-  font-style: normal;
-  font-weight: bold;
-  src: url("../font/nsjpd.woff") format("woff");
-}
 
 html {
   background-color: $content-bg-color;
@@ -33,6 +20,7 @@ body {
     Kaku Gothic ProN, Hiragino Sans, ヒラギノ角ゴ ProN W3, Arial, メイリオ, Meiryo, sans-serif;
   font-size: 14px;
   letter-spacing: 0.05rem;
+  margin: 0;
 }
 
 * {

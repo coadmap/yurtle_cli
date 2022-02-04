@@ -3,11 +3,4 @@
 .img {
   display: inline-block;
   object-fit: cover;
-
-  &.size {
-    width: 100%;
-  }
-  &.auto {
-    width: auto;
-  }
 }

@@ -8,22 +8,14 @@ type ImageProps = {
   width?: number | string;
   height?: number | string;
   className?: string;
-  autoWidth?: boolean;
-  objectFit?: "cover" | "contain";
 };
 
-const Image: FC<ImageProps> = ({ src = "", width, height, className, autoWidth }) => (
+const Image: FC<ImageProps> = ({ src, width, height, className }) => (
   <img
     src={src ?? DefaultImage}
-    // width, height属性はアスペクト比を計算するもの
     width={width}
     height={height}
-    className={classNames(
-      styles.img,
-      { [styles.size]: !width },
-      { [styles.auto]: autoWidth },
-      className
-    )}
+    className={classNames(styles.img, className)}
     style={{ width: width, height: height }}
     alt="画像"
   />

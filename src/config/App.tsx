@@ -1,4 +1,4 @@
-import "../assets/styles/App.css";
+import "assets/styles/global.scss";
 import "react-day-picker/lib/style.css";
 import Home from "pages";
 

@@ -9,7 +9,7 @@ type LogoProps = {
   className?: string;
 };
 
-const Logo: VFC<LogoProps> = ({ size, className }) => {
+const Logo: VFC<LogoProps> = ({ className }) => {
   return <Image src={LOGO} className={classNames(styles.logo, className)} />;
 };
 

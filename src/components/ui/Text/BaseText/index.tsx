@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import classNames from "classnames";
 import styles from "./styles.module.scss";
 
-export type TextColor = "black" | "white" | "primary" | "danger" | "sub" | "gradation";
+export type TextColor = "black" | "white" | "primary" | "danger" | "warning" | "sub" | "gradation";
 export type BaseTextProps = {
   // attributes
   /// FIXME: ThemeColorを修正したらそれを使う
@@ -16,7 +16,7 @@ export type BaseTextProps = {
   inline?: boolean;
   htmlNode?: string;
   className?: string;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onClick?: (_event: React.MouseEvent<HTMLInputElement>) => void;
 };
 
 const BaseText: FC<BaseTextProps> = ({
