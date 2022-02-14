@@ -1,8 +1,10 @@
 import { ApiClient } from "dataAccess/api";
-import { Task } from "domain/entity/taskEntity";
+import { TaskRepository } from "domain/repository";
 
-type CompleteTaskInput = {
-  id: string;
+export const completeTask: TaskRepository["complete"] = async (id) => {
+  const res = await ApiClient.post<AwaitType<TaskRepository["complete"]>>(
+    `/tasks/${id}/complete`,
+    {}
+  );
+  return res.data;
 };
-const COMPLETE_TASK_REQUEST = ApiClient.post("/tasks/:id/complete");
-export default function useCompleteTask(): ApiRequestResult<CompleteTaskInput, Task>;

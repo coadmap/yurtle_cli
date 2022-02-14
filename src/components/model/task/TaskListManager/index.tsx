@@ -3,14 +3,9 @@ import classNames from "classnames";
 import styles from "./style.module.scss";
 import { Task } from "domain/entity/taskEntity";
 import TaskListItem from "components/model/task/TaskListItem";
+import { listTasks } from "components/model/task/TaskListManager/requests";
 
-type TaskListManagerProps = {
-  fetchMyTasks: () => Promise<Task[]>;
-  updateTask: (id: string, task: Partial<Task>) => Promise<void>;
-  deleteTask: (id: string) => Promise<void>;
-};
-
-const TaskListManager: VFC<TaskListManagerProps> = ({ fetchMyTasks }) => {
+const TaskListManager: VFC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const onRemoveTask = useCallback(
     (id: string) => {
@@ -20,10 +15,10 @@ const TaskListManager: VFC<TaskListManagerProps> = ({ fetchMyTasks }) => {
   );
 
   useEffect(() => {
-    fetchMyTasks()
-      .then((d) => setTasks(d))
+    listTasks()
+      .then((d) => setTasks(d.tasks))
       .catch((e) => console.error(e.message));
-  }, [fetchMyTasks]);
+  }, [listTasks]);
 
   return (
     <div className={classNames(styles.list)}>

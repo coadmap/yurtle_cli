@@ -8,37 +8,47 @@ import DeadlineDisplay from "components/ui/DeadlineDisplay";
 import Popover from "react-popover";
 import moment from "moment";
 import LiquidRow from "components/ui/LiquidRow";
+import { deleteTask } from "components/model/task/TaskListItem/requests/deleteTask";
+import { completeTask } from "components/model/task/TaskListItem/requests/completeTask";
+import { updateTask } from "components/model/task/TaskListItem/requests/updateTask";
 
 type TaskListItemProps = {
   task?: Task | null;
-  onUpdateTask?: (id: string, newValue)
-  onDeleteTask?: (id: string) => void;
-  onCompleteTask?: (id: string) => void;
+  onRemove?: (id: string) => void;
   className?: string;
 };
 
-const TaskListItem: VFC<TaskListItemProps> = ({ task, onDeleteTask, onCompleteTask, className }) => {
+const TaskListItem: VFC<TaskListItemProps> = ({ task, onRemove, className }) => {
   const isFirstRender = useRef(true);
   const [isTaskNameEdit, setIsTaskNameEdit] = useState(!task);
   const [value, setValue] = useState(task?.name);
   const [deadline, setDeadline] = useState(task?.deadline);
   const [openDatePick, setOpenDatePick] = useState(false);
   const onUpdateName = useCallback(() => {
-    // TODO: 実装
+    if (!task || !value) return;
+
     console.log(value);
     setIsTaskNameEdit(false);
+    updateTask(task.id, value);
   }, [setIsTaskNameEdit]);
+  const onDeleteTask = useCallback(() => {
+    if (!task) return;
+
+    onRemove?.(task.id);
+    deleteTask(task.id);
+  }, [onRemove, deleteTask]);
   const onDone = useCallback(() => {
     if (!task?.id) return;
 
+    completeTask(task.id);
     console.log("タスク完了");
   }, []);
 
   useEffect(() => {
-    if (isFirstRender.current || !task) return;
+    if (isFirstRender.current) return;
 
-    if (!value) onDeleteTask?.(task?.id);
-  }, [task?.id, value, onDeleteTask]);
+    if (!value) onDeleteTask();
+  }, [value, onDeleteTask]);
 
   return (
     <div className={classNames(styles.item, className)}>
