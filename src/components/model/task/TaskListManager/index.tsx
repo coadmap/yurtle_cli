@@ -7,6 +7,12 @@ import { listTasks } from "components/model/task/TaskListManager/requests";
 
 const TaskListManager: VFC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const onCreateTask = useCallback(
+    (newTask: Task) => {
+      setTasks([...tasks, newTask]);
+    },
+    [tasks, setTasks]
+  );
   const onRemoveTask = useCallback(
     (id: string) => {
       setTasks(tasks.filter((t) => t.id !== id));
@@ -22,9 +28,16 @@ const TaskListManager: VFC = () => {
 
   return (
     <div className={classNames(styles.list)}>
-      {tasks.map((t) => (
-        <TaskListItem task={t} onRemove={onRemoveTask} />
+      {tasks.map((t, idx) => (
+        <TaskListItem
+          key={t.id}
+          task={t}
+          onRemove={onRemoveTask}
+          isFirst={idx === 0}
+          isLast={idx === tasks.length}
+        />
       ))}
+      <TaskListItem key={tasks.length} />
     </div>
   );
 };

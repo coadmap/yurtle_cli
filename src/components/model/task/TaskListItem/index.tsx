@@ -11,25 +11,35 @@ import LiquidRow from "components/ui/LiquidRow";
 import { deleteTask } from "components/model/task/TaskListItem/requests/deleteTask";
 import { completeTask } from "components/model/task/TaskListItem/requests/completeTask";
 import { updateTask } from "components/model/task/TaskListItem/requests/updateTask";
+import { createTask } from "components/model/task/TaskListItem/requests";
 
 type TaskListItemProps = {
   task?: Task | null;
+  isFirst?: boolean;
+  isLast?: boolean;
+  onAdd?: (task: Task) => void;
   onRemove?: (id: string) => void;
   className?: string;
 };
 
-const TaskListItem: VFC<TaskListItemProps> = ({ task, onRemove, className }) => {
+const TaskListItem: VFC<TaskListItemProps> = ({ task, onAdd, onRemove, className }) => {
   const isFirstRender = useRef(true);
   const [isTaskNameEdit, setIsTaskNameEdit] = useState(!task);
   const [value, setValue] = useState(task?.name);
   const [deadline, setDeadline] = useState(task?.deadline);
   const [openDatePick, setOpenDatePick] = useState(false);
+  const onCreate = useCallback(() => {
+    if (task || !value) return;
+
+    setIsTaskNameEdit(false);
+    createTask({ name: value });
+  }, [task?.id]);
   const onUpdateName = useCallback(() => {
     if (!task || !value) return;
 
     console.log(value);
     setIsTaskNameEdit(false);
-    updateTask(task.id, value);
+    updateTask(task.id, { name: value });
   }, [setIsTaskNameEdit]);
   const onDeleteTask = useCallback(() => {
     if (!task) return;
@@ -60,10 +70,11 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task, onRemove, className }) => 
               name="task.name"
               className={styles.input}
               value={value}
+              placeholder="タスクを入力"
               onChange={(e) => setValue(e.currentTarget.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  onUpdateName();
+                  task ? onUpdateName() : onCreate();
                 }
               }}
               onBlur={onUpdateName}

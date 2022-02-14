@@ -1,5 +1,7 @@
 @import "src/assets/styles/modules";
 
 .list {
-  //
+  @extend .smVGutter;
+
+  padding: $space-md 0;
 }
