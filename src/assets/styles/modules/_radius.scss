@@ -1,0 +1,22 @@
+// 角丸
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
+
+@mixin border-radius($size) {
+  overflow: hidden;
+
+  @if $size == xs {
+    border-radius: $radius-xs;
+  } @else if $size == sm {
+    border-radius: $radius-sm;
+  } @else if $size == md {
+    border-radius: $radius-md;
+  } @else if $size == lg {
+    border-radius: $radius-lg;
+  } @else if $size == xl {
+    border-radius: $radius-xl;
+  }
+}

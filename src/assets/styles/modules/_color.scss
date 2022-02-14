@@ -1,0 +1,94 @@
+// Theme::MonoKuro
+$white: #fff;
+$light-gray: #f8f8f8;
+$medium-gray: #b2b2b2;
+$dark-gray: #2b3e3f;
+$black: #181a1d;
+
+// Theme
+$primary-color: #03c1ab;
+$normal-color: $dark-gray;
+$danger-color: #d73a49;
+$warning-color: #ffd700;
+$sub-color: $medium-gray;
+$disabled-color: $medium-gray; // TODO: 消す
+
+// UI Variables
+$input-bg-color: #f0f5f4;
+$content-bg-color: #dfebed;
+$editor-bg-color: $dark-gray;
+$line-color: #e4e4e4;
+$default-content-color: $light-gray;
+
+$primary-gradient-colors: (
+  first: #03c1ab,
+  end: #0c63b2,
+);
+
+$secondary-gradient-colors: (
+  first: #03b398,
+  middle: #21acb7,
+  end: #4b8bb2,
+);
+
+@mixin bg-gradient($deg: 60deg, $start-color: #fff, $end-color: #000) {
+  background: linear-gradient($deg, $start-color, $end-color);
+}
+
+@mixin primary-gradient($deg: 60deg) {
+  background: linear-gradient($deg, #03b398, #21acb7, #4b67b2);
+}
+
+@mixin secondary-gradient($deg: 60deg) {
+  background: linear-gradient($deg, #f7931e, #d4145a);
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.secondary {
+  color: $dark-gray;
+}
+
+.danger {
+  color: $danger-color;
+}
+
+.warning {
+  color: $warning-color;
+}
+
+.disable {
+  color: $disabled-color;
+}
+
+.line {
+  color: $line-color;
+}
+
+.black {
+  color: $black;
+}
+
+.darkGray {
+  color: $dark-gray;
+}
+
+.mediumGray {
+  color: $medium-gray;
+}
+
+.lightGray {
+  color: $light-gray;
+}
+
+.white {
+  color: $white;
+}
+
+// JSで使えるように
+:export {
+  varGradientEndColor: map-get($primary-gradient-colors, end);
+  varGradientFirstColor: map-get($primary-gradient-colors, first);
+}

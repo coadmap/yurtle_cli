@@ -1,0 +1,29 @@
+/**
+  フォントに関しての設定。
+  global.scssでbody全体のfont-familyは設定済み
+**/
+
+// フォントサイズ <= FIXME: なくなる予定
+$f-size-xxs: 8px;
+$f-size-xs: 10px;
+$f-size-sm: 12px;
+$f-size-md: 14px;
+$f-size-lg: 18px;
+$f-size-xl: 21px;
+$f-size-xxl: 32px;
+
+// こっちは使う
+$f-size-page-title: 32px;
+$f-size-section-title: 21px;
+$f-size-group-title: 18px;
+$f-size-content-title: 14px;
+$f-size-label: 12px;
+$f-size-body-text: 14px;
+$f-size-sub-info-text: 10px;
+
+@mixin fontWrap($lineClamp: 2) {
+  -webkit-box-orient: vertical;
+  display: -webkit-box !important;
+  -webkit-line-clamp: $lineClamp;
+  overflow: hidden;
+}
