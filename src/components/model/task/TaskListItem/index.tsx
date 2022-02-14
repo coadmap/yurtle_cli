@@ -1,5 +1,5 @@
 import { Task } from "domain/entity/taskEntity";
-import { useCallback, useState, VFC } from "react";
+import { useCallback, useEffect, useRef, useState, VFC } from "react";
 import classNames from "classnames";
 import styles from "./style.module.scss";
 import { CheckCircleIcon, TimeIcon } from "components/ui/Icon";
@@ -11,10 +11,14 @@ import LiquidRow from "components/ui/LiquidRow";
 
 type TaskListItemProps = {
   task?: Task | null;
+  onUpdateTask?: (id: string, newValue)
+  onDeleteTask?: (id: string) => void;
+  onCompleteTask?: (id: string) => void;
   className?: string;
 };
 
-const TaskListItem: VFC<TaskListItemProps> = ({ task, onCompleteTask, onRemove, className }) => {
+const TaskListItem: VFC<TaskListItemProps> = ({ task, onDeleteTask, onCompleteTask, className }) => {
+  const isFirstRender = useRef(true);
   const [isTaskNameEdit, setIsTaskNameEdit] = useState(!task);
   const [value, setValue] = useState(task?.name);
   const [deadline, setDeadline] = useState(task?.deadline);
@@ -24,13 +28,17 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task, onCompleteTask, onRemove, 
     console.log(value);
     setIsTaskNameEdit(false);
   }, [setIsTaskNameEdit]);
-  const onRemove = useCallback(() => {}, []);
   const onDone = useCallback(() => {
     if (!task?.id) return;
 
     console.log("タスク完了");
-    onCompleteTask?.(task.id);
-  }, [onCompleteTask]);
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current || !task) return;
+
+    if (!value) onDeleteTask?.(task?.id);
+  }, [task?.id, value, onDeleteTask]);
 
   return (
     <div className={classNames(styles.item, className)}>
