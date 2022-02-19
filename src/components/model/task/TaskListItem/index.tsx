@@ -29,31 +29,31 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task, onAdd, onRemove, className
   const [deadline, setDeadline] = useState(task?.deadline ? moment(task.deadline) : undefined);
   const [openDatePick, setOpenDatePick] = useState(false);
   const onCreate = useCallback(async () => {
-    if (task || !value) return;
+    if (task?.id || !value) return;
 
     setIsTaskNameEdit(false);
     const newTask = await createTask({ name: value });
     onAdd?.(newTask);
-  }, [task?.id, onAdd, setIsTaskNameEdit]);
+  }, [task?.id, value, onAdd, setIsTaskNameEdit]);
   const onUpdateName = useCallback(async () => {
     if (!task || !value) return;
 
     setIsTaskNameEdit(false);
     await updateTask(task.id, { name: value });
-  }, [setIsTaskNameEdit]);
+  }, [task?.id, value, setIsTaskNameEdit]);
   const onDeleteTask = useCallback(async () => {
     if (!task) return;
 
     await deleteTask(task.id);
     onRemove?.(task.id);
-  }, [onRemove, deleteTask]);
+  }, [task?.id, onRemove]);
   const onDone = useCallback(async () => {
     if (!task?.id) return;
 
     await completeTask(task.id);
-    console.log("タスク完了");
     onRemove?.(task.id);
-  }, []);
+    // TODO: ページ内通知を出したい
+  }, [task?.id, onRemove]);
 
   useEffect(() => {
     if (isFirstRender.current) return;

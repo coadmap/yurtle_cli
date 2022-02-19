@@ -28,17 +28,19 @@ const TaskListManager: VFC = () => {
 
   return (
     <div className={classNames(styles.list)}>
-      {tasks.map((t, idx) => (
-        <TaskListItem
-          key={t.id}
-          task={t}
-          onAdd={onAddTask}
-          onRemove={onRemoveTask}
-          isFirst={idx === 0}
-          isLast={idx === tasks.length}
-        />
-      ))}
-      <TaskListItem key={tasks.length} />
+      {tasks
+        .filter((t) => !t.completed)
+        .map((t, idx) => (
+          <TaskListItem
+            key={t.id}
+            task={t}
+            onAdd={onAddTask}
+            onRemove={onRemoveTask}
+            isFirst={idx === 0}
+            isLast={idx === tasks.length}
+          />
+        ))}
+      <TaskListItem key={tasks.length} onAdd={onAddTask} />
     </div>
   );
 };
