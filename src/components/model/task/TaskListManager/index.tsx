@@ -7,7 +7,7 @@ import { listTasks } from "components/model/task/TaskListManager/requests";
 
 const TaskListManager: VFC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const onCreateTask = useCallback(
+  const onAddTask = useCallback(
     (newTask: Task) => {
       setTasks([...tasks, newTask]);
     },
@@ -32,6 +32,7 @@ const TaskListManager: VFC = () => {
         <TaskListItem
           key={t.id}
           task={t}
+          onAdd={onAddTask}
           onRemove={onRemoveTask}
           isFirst={idx === 0}
           isLast={idx === tasks.length}

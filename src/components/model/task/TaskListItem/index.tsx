@@ -26,32 +26,33 @@ const TaskListItem: VFC<TaskListItemProps> = ({ task, onAdd, onRemove, className
   const isFirstRender = useRef(true);
   const [isTaskNameEdit, setIsTaskNameEdit] = useState(!task);
   const [value, setValue] = useState(task?.name);
-  const [deadline, setDeadline] = useState(task?.deadline);
+  const [deadline, setDeadline] = useState(task?.deadline ? moment(task.deadline) : undefined);
   const [openDatePick, setOpenDatePick] = useState(false);
-  const onCreate = useCallback(() => {
+  const onCreate = useCallback(async () => {
     if (task || !value) return;
 
     setIsTaskNameEdit(false);
-    createTask({ name: value });
-  }, [task?.id]);
-  const onUpdateName = useCallback(() => {
+    const newTask = await createTask({ name: value });
+    onAdd?.(newTask);
+  }, [task?.id, onAdd, setIsTaskNameEdit]);
+  const onUpdateName = useCallback(async () => {
     if (!task || !value) return;
 
-    console.log(value);
     setIsTaskNameEdit(false);
-    updateTask(task.id, { name: value });
+    await updateTask(task.id, { name: value });
   }, [setIsTaskNameEdit]);
-  const onDeleteTask = useCallback(() => {
+  const onDeleteTask = useCallback(async () => {
     if (!task) return;
 
+    await deleteTask(task.id);
     onRemove?.(task.id);
-    deleteTask(task.id);
   }, [onRemove, deleteTask]);
-  const onDone = useCallback(() => {
+  const onDone = useCallback(async () => {
     if (!task?.id) return;
 
-    completeTask(task.id);
+    await completeTask(task.id);
     console.log("タスク完了");
+    onRemove?.(task.id);
   }, []);
 
   useEffect(() => {

@@ -14,7 +14,7 @@ const DeadlineDisplay: VFC<DeadlineDisplayProps> = ({
   onClick,
 }) => {
   const info = useMemo(() => {
-    const now = moment();
+    const now = moment(new Date());
     if (date.isSame(now, "day")) {
       return <BodyText color="warning">今日</BodyText>;
     } else if (date.isSame(now.add(1, "day"), "day")) {
