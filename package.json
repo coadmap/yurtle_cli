@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/humps": "^2.0.1",
     "@types/react-popover": "^0.5.4",
+    "dotenv-cli": "^5.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1"
