@@ -17,5 +17,8 @@
 }
 
 .popover {
+  @include border-radius(sm);
+  @extend .smPadding;
+
   background-color: $white;
 }

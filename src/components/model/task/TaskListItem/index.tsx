@@ -46,6 +46,12 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
       setIsTaskNameEdit(false);
       await updateTask(task.id, { name: value });
     }, [task?.id, value, setIsTaskNameEdit]);
+    const onUpdateDeadline = useCallback(async () => {
+      if (!task || !value) return;
+
+      setOpenDatePick(false);
+      await updateTask(task.id, { deadline });
+    }, [task?.id, deadline]);
     const onDeleteTask = useCallback(async () => {
       if (!task) return;
 
@@ -116,22 +122,25 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
             onOuterAction={() => setOpenDatePick(false)}
             body={
               <div className={styles.popover}>
-                <DayPicker onDayClick={(day) => setDeadline(moment(day))} />
+                <DayPicker
+                  onDayClick={(day) => {
+                    setDeadline(moment(day));
+                    onUpdateDeadline();
+                  }}
+                />
               </div>
             }
           >
-            {deadline ? (
-              <DeadlineDisplay
-                date={deadline}
-                format="YYYY/MM/DD"
-                onClick={() => setOpenDatePick(true)}
-              />
-            ) : (
-              <div className={classNames(styles.row, styles.xsHGutter)}>
-                <TimeIcon color="sub" />
-                <BodyText color="sub">期日</BodyText>
-              </div>
-            )}
+            <div className={styles.clickable} onClick={() => setOpenDatePick(true)}>
+              {deadline ? (
+                <DeadlineDisplay date={deadline} format="YYYY/MM/DD" />
+              ) : (
+                <div className={classNames(styles.row, styles.xsHGutter)}>
+                  <TimeIcon color="sub" />
+                  <BodyText color="sub">期日</BodyText>
+                </div>
+              )}
+            </div>
           </Popover>
         </LiquidRow>
       </div>
