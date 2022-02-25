@@ -18,7 +18,14 @@ const TaskListManager: VFC = () => {
   );
   const onRemoveTask = useCallback(
     (id: string) => {
-      setTasks(tasks.filter((t) => t.id !== id));
+      setTasks(
+        tasks.filter((t, idx) => {
+          if (t.id === id && idx - 1 >= 0) {
+            setSelectedTaskId(tasks[idx - 1].id);
+          }
+          return t.id !== id;
+        })
+      );
     },
     [tasks, setTasks]
   );

@@ -1,5 +1,5 @@
 import { Task } from "domain/entity/taskEntity";
-import { forwardRef, useCallback, useEffect, useRef, useState, VFC } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import styles from "./style.module.scss";
 import { CheckCircleIcon, TimeIcon } from "components/ui/Icon";
@@ -67,6 +67,11 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
 
       if (!value) onDeleteTask();
     }, [value, onDeleteTask]);
+    useEffect(() => {
+      if (editing) {
+        setIsTaskNameEdit(true);
+      }
+    }, [editing]);
 
     return (
       <div className={classNames(styles.item, className)}>
