@@ -6,7 +6,7 @@ import { CheckCircleIcon, TimeIcon } from "components/ui/Icon";
 import DayPicker from "react-day-picker";
 import DeadlineDisplay from "components/ui/DeadlineDisplay";
 import Popover from "react-popover";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import LiquidRow from "components/ui/LiquidRow";
 import { deleteTask } from "components/model/task/TaskListItem/requests/deleteTask";
 import { completeTask } from "components/model/task/TaskListItem/requests/completeTask";
@@ -46,12 +46,16 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
       setIsTaskNameEdit(false);
       await updateTask(task.id, { name: value });
     }, [task?.id, value, setIsTaskNameEdit]);
-    const onUpdateDeadline = useCallback(async () => {
-      if (!task || !value) return;
+    const onUpdateDeadline = useCallback(
+      async (date: Moment) => {
+        if (!task) return;
 
-      setOpenDatePick(false);
-      await updateTask(task.id, { deadline });
-    }, [task?.id, deadline]);
+        setOpenDatePick(false);
+        setDeadline(date);
+        await updateTask(task.id, { deadline: date.toISOString() });
+      },
+      [task?.id]
+    );
     const onDeleteTask = useCallback(async () => {
       if (!task) return;
 
@@ -124,8 +128,8 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
               <div className={styles.popover}>
                 <DayPicker
                   onDayClick={(day) => {
-                    setDeadline(moment(day));
-                    onUpdateDeadline();
+                    console.log(day);
+                    onUpdateDeadline(moment(day));
                   }}
                 />
               </div>
