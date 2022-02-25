@@ -33,7 +33,9 @@ const TaskListManager: VFC = () => {
   useEffect(() => {
     listTasks()
       .then((d) => setTasks(d.tasks))
-      .catch((e) => console.error(e.message));
+      .catch((_e) => {
+        /// NOOP
+      });
   }, [listTasks]);
 
   return (

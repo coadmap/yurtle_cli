@@ -1,13 +1,13 @@
 declare global {
+  /**
+   * DesignSystem
+   * **/
   type SizeType = "sm" | "md" | "lg";
+  type Color = "primary" | "special" | "default" | "sub" | "danger" | "warning";
 
-  // FIXME: ここにあるべきじゃない感
-  interface ApiRequestResult<TInput, TPayload, TError = Error> {
-    data: TPayload;
-    loading: boolean;
-    error: TError;
-  }
-
+  /**
+   * Utils
+   * **/
   type AwaitType<T> = T extends Promise<infer U>
     ? U
     : T extends (...args: Array<any>) => Promise<infer V>

@@ -12,6 +12,7 @@ import { deleteTask } from "components/model/task/TaskListItem/requests/deleteTa
 import { completeTask } from "components/model/task/TaskListItem/requests/completeTask";
 import { updateTask } from "components/model/task/TaskListItem/requests/updateTask";
 import { createTask } from "components/model/task/TaskListItem/requests";
+import { BodyText } from "components/ui/Text";
 
 type TaskListItemProps = {
   task?: Task | null;
@@ -127,8 +128,8 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
               />
             ) : (
               <div className={classNames(styles.row, styles.xsHGutter)}>
-                <TimeIcon />
-                <p>期日</p>
+                <TimeIcon color="sub" />
+                <BodyText color="sub">期日</BodyText>
               </div>
             )}
           </Popover>
