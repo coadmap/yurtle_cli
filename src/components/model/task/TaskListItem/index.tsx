@@ -37,7 +37,7 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
       if (task?.id || !value) return;
 
       setIsTaskNameEdit(false);
-      const newTask = await createTask({ name: value });
+      const newTask = await createTask({ name: value, deadline: deadline?.toISOString() });
       onAdd?.(newTask);
     }, [task?.id, value, onAdd, setIsTaskNameEdit]);
     const onUpdateName = useCallback(async () => {
@@ -48,11 +48,11 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
     }, [task?.id, value, setIsTaskNameEdit]);
     const onUpdateDeadline = useCallback(
       async (date: Moment) => {
-        if (!task) return;
-
         setOpenDatePick(false);
         setDeadline(date);
-        await updateTask(task.id, { deadline: date.toISOString() });
+        if (task) {
+          await updateTask(task.id, { deadline: date.toISOString() });
+        }
       },
       [task?.id]
     );
@@ -121,31 +121,33 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
             )}
           </div>
 
-          <Popover
-            isOpen={openDatePick}
-            onOuterAction={() => setOpenDatePick(false)}
-            body={
-              <div className={styles.popover}>
-                <DayPicker
-                  onDayClick={(day) => {
-                    console.log(day);
-                    onUpdateDeadline(moment(day));
-                  }}
-                />
-              </div>
-            }
-          >
-            <div className={styles.clickable} onClick={() => setOpenDatePick(true)}>
-              {deadline ? (
-                <DeadlineDisplay date={deadline} format="YYYY/MM/DD" />
-              ) : (
-                <div className={classNames(styles.row, styles.xsHGutter)}>
-                  <TimeIcon color="sub" />
-                  <BodyText color="sub">期日</BodyText>
+          <div>
+            <Popover
+              isOpen={openDatePick}
+              onOuterAction={() => setOpenDatePick(false)}
+              body={
+                <div className={styles.popover}>
+                  <DayPicker
+                    onDayClick={(day) => {
+                      console.log(day);
+                      onUpdateDeadline(moment(day));
+                    }}
+                  />
                 </div>
-              )}
-            </div>
-          </Popover>
+              }
+            >
+              <div className={styles.clickable} onClick={() => setOpenDatePick(true)}>
+                {deadline ? (
+                  <DeadlineDisplay date={deadline} format="YYYY/MM/DD" />
+                ) : (
+                  <div className={classNames(styles.row, styles.xsHGutter)}>
+                    <TimeIcon color="sub" />
+                    <BodyText color="sub">期日</BodyText>
+                  </div>
+                )}
+              </div>
+            </Popover>
+          </div>
         </LiquidRow>
       </div>
     );
