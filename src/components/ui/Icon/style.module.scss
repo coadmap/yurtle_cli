@@ -1,4 +1,26 @@
+@import "src/assets/styles/modules";
+
 .icon {
   font-size: 16px;
   vertical-align: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // TODO: 順次全てのcolorに対応
+  &[data-color="primary"] {
+    path {
+      fill: $primary-color;
+    }
+  }
+  &[data-color="sub"] {
+    path {
+      fill: $sub-color;
+    }
+  }
+  &[data-color="danger"] {
+    path {
+      fill: $danger-color;
+    }
+  }
 }

@@ -3,9 +3,9 @@ import humps from "humps";
 import { CacheKeys } from "dataAccess/cache";
 
 // TODO: envから使う
-export const API_HOST = "http://localhost:4444";
+export const API_ORIGIN = process.env.REACT_APP_API_ORIGIN;
 export const ApiClient = axios.create({
-  baseURL: API_HOST,
+  baseURL: API_ORIGIN,
   transformResponse: [
     ...((axios.defaults.transformResponse as AxiosResponseTransformer[]) || []),
     (data) => humps.camelizeKeys(data),

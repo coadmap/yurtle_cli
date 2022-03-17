@@ -5,6 +5,7 @@ import { ReactComponent as CheckCircle } from "assets/images/icon/CheckCircle.sv
 import { ReactComponent as Time } from "assets/images/icon/Time.svg";
 
 export type BaseIconProps = {
+  color?: Color;
   onClick?: (_event: React.MouseEvent<HTMLInputElement>) => void;
   className?: string;
 };

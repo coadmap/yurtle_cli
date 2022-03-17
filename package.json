@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "dotenv -e .env react-scripts start",
+    "build": "dotenv -e .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"src/**/*.{scss,ts,tsx}\""
@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/humps": "^2.0.1",
     "@types/react-popover": "^0.5.4",
+    "dotenv-cli": "^5.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1"
