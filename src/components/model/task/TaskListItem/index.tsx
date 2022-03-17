@@ -127,9 +127,7 @@ const TaskListItem = forwardRef<HTMLInputElement, TaskListItemProps>(
               onOuterAction={() => setOpenDatePick(false)}
               body={
                 <div className={styles.popover}>
-                  <DayPicker
-                    onDayClick={(day) => onUpdateDeadline(moment(day))}
-                  />
+                  <DayPicker onDayClick={(day) => onUpdateDeadline(moment(day))} />
                 </div>
               }
             >
